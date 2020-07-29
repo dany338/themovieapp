@@ -7,8 +7,8 @@ import apiMovies from '../api/movies';
 import ModalVideo from '../components/ModalVideo';
 import { BASE_PATH_IMG } from '../utils/constants';
 import usePreferences from '../hooks/usePreferences';
-import startDark from '../assets/png/startDark.png';
-import starLight from '../assets/png/starLight.png';
+import starDark from '../assets/images/starDark.png';
+import starLight from '../assets/images/starLight.png';
 
 const MovieRating = (props) => {
   const { voteCount, voteAverage } = props;
@@ -19,7 +19,7 @@ const MovieRating = (props) => {
     <View style={styles.viewRating}>
       <Rating
         type="custom"
-        ratingImage={theme === 'dark' ? startDark : starLight}
+        ratingImage={theme === 'dark' ? starDark : starLight}
         ratingColor="#ffc205"
         ratingBackgroundColor={theme === 'dark' ? '#192734' : '#f0f0f0'}
         startingValue={media}
@@ -27,7 +27,7 @@ const MovieRating = (props) => {
         style={{ marginRight: 15 }}
       />
       <Text style={{ fontSize: 16, marginRight: 5}}>{media}</Text>
-      <Text style={{ fontSize: 12, Color: '#8697a5' }}>{voteCount} votes</Text>
+      <Text style={{fontSize: 12, color: '#8697a5' }}>{voteCount} votes</Text>
     </View>
   );
 };
@@ -91,11 +91,15 @@ const Movie = (props) => {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <MovieImage posterPath={movie.poster_path} />
         <MovieTrailer setShowVideo={setShowVideo} />
         <MovieTitle movie={movie} />
-        <MovieRating voteCount={movie.vote_count} voteAverage={} />
+        <MovieRating voteCount={movie.vote_count} voteAverage={movie.vote_average} />
+        <Text style={styles.overview}>{movie.overview}</Text>
+        <Text style={[styles.overview, { marginBottom: 30 }]}>
+          Fecha de lanzamiento: {movie.release_date}
+        </Text>
       </ScrollView>
       <ModalVideo show={showVideo} setShow={setShowVideo} idMovie={id} />
     </>
@@ -147,5 +151,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  overview: {
+    marginHorizontal: 30,
+    marginTop: 20,
+    textAlign: 'justify',
+    color: '#8697a5',
   },
 });

@@ -51,6 +51,22 @@ export const apiMovies = {
       return result;
     });
   },
+  getPopularMovies: (page = 1) => {
+    const url = `${API_HOST}/movie/popular?api_key=${API_KEY}&language=${LANG}&page=${page}`;
+    return fetch(url).then((response) => {
+      return response.json();
+    }).then((result) => {
+      return result;
+    });
+  },
+  searchMovies: search => {
+    const url = `${API_HOST}/search/movie?api_key=${API_KEY}&language=${LANG}&query=${search}`;
+    return fetch(url).then((response) => {
+      return response.json();
+    }).then((result) => {
+      return result;
+    });
+  },
 };
 
 export default apiMovies;

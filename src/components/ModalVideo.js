@@ -13,6 +13,7 @@ const ModalVideo = (props) => {
   useEffect(() => {
     apiMovies.getVideoMovie(idMovie).then((response) => {
       const idVideo = response.results.filter((item) => item.site === 'YouTube')[0]?.key;
+      console.log('idVideo', idVideo);
       setVideo(idVideo);
     });
   }, [idMovie]);
@@ -23,7 +24,8 @@ const ModalVideo = (props) => {
         <YouTube videoId={video} style={styles.video}/>
       ) : (
         <WebView
-          style={{with: 500}}
+          style={{ width: 500 }}
+          javaScriptEnabled={true}
           source={{ uri: `https://www.youtube.com/embed/${video}?controls=0&showinfo=0` }}
         />
       )}

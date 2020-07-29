@@ -53,7 +53,11 @@ const StackNavigation = (props) => {
         component={Popular}
         options={{title: 'Películas Populares', headerLeft: () => buttonLeft('popular'), headerRight: () => buttonRight()}}
       />
-      <Stack.Screen name="search" component={Search} options={{title: '', headerLeft: () => buttonLeft('search')}} />
+      <Stack.Screen
+        name="search"
+        component={Search}
+        options={{title: '', headerTransparent: true,  headerLeft: () => buttonLeft('search')}}
+      />
     </Stack.Navigator>
   );
 };

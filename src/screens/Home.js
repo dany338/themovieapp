@@ -31,7 +31,7 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    apiMovies.getGenreMoviesApi().then((response) => {
+    apiMovies.getGenreMoviesApi(genreSelected).then((response) => {
       setGenreMovies(response.results);
     });
   }, [genreSelected]);
